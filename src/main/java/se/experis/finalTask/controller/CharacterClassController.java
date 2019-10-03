@@ -20,7 +20,7 @@ public class CharacterClassController {
     }
 	
 	@GetMapping("/api/class/{className}")
-    public CharacterClass getAll(@PathVariable String race) {
+    public CharacterClass getAll(@PathVariable("className") String race) {
         return classRepository.findClassByRace(race);
     }
 }

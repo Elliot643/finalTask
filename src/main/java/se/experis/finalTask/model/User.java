@@ -1,5 +1,7 @@
 package se.experis.finalTask.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,11 @@ public class User {
         userName = "Jonas";
         pw = "password";
     }
+	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<GameCharacter> gameCharacter;
+	
 
 	
 }

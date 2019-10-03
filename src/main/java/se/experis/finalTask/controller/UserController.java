@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import se.experis.finalTask.model.User;
@@ -35,12 +37,14 @@ public class UserController {
     
     
 	@PostMapping("/api/user")
-    public String addAUser() {
-        User aThing = new User();
+	@ResponseBody
+    public String addAUser(@RequestBody User aThing) {
         userRepository.save(aThing);
 
         return "200";
     }
+	
+	
 
 
     
