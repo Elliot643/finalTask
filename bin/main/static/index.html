@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    
+
+</head>
+<body>
+	<h5>List Users</h5>
+	<form action="/api/users">
+    	<input type="submit" value="List Users" />
+	</form>
+
+	
+	<h5>Get User From ID</h5>
+	<form>
+	    ID: <input type="text" id="form_id"> <br>   
+	    <input type="button" value="Submit" onclick="searchById()">
+	</form>
+	
+	<h5>Add User</h5>
+	<form>
+		Username: <input type="text" id="userName"><br>
+		Password: <input type="text" id="pw"><br>
+    	<input type="submit" value="Submit" onclick="addUser()">
+	</form>
+	
+	
+	
+	<h5>Get Class Info</h5>
+	<form id="frm1">
+	    Class Name: <input type="text" id="className"><br>    
+	    <input type="button" value="Submit" onclick="getClass()">
+	</form>
+
+<script type="text/javascript">
+	function searchById() {
+  		var input_id = document.getElementById("form_id").value;
+  		window.location.replace("/api/user/"+input_id);
+	}
+	function getClass() {
+  		var className = document.getElementById("className").value;
+  		window.location.replace("/api/class/"+className);
+	}
+	function addUser() {
+		console.log("CLICKED");
+		var uName = document.getElementById("userName").value;
+		var pword = document.getElementById("pw").value;
+		
+		var jsonString = {user_name:uName, pw:pword};
+		console.log(JSON.stringify(jsonString));
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', "/api/user", true);
+		xhr.send(JSON.stringify(jsonString));
+		window.location.replace("/");
+	}
+</script>
+
+
+
+</body>
+</html>

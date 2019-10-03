@@ -19,12 +19,6 @@ public class User {
 	@Column(name = "pw")
 	public String pw;
 	
-	public User(){
-        id = 0;
-        userName = "Jonas";
-        pw = "password";
-    }
-	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<GameCharacter> gameCharacter;
