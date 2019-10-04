@@ -20,9 +20,8 @@ import se.experis.finalTask.repository.UserRepository;
 @Controller
 public class UserController {
 	
-
     @Autowired
-    private final UserRepository userRepository;
+    public final UserRepository userRepository;
     
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -35,7 +34,7 @@ public class UserController {
     @GetMapping("/api/user/{id}")
     public User getUserFromId(@PathVariable Integer id) {
         return userRepository.findUserById(id);
-    }	
+    }
     
     
 	@PostMapping("/api/user")

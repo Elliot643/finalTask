@@ -17,7 +17,7 @@ public class CharacterClass {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "class_id")
 	public int id;
 	
 	@Column(name = "race")
@@ -27,6 +27,11 @@ public class CharacterClass {
 	public String description;
 	
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "characterClass")
 	private List<GameCharacter> gameCharacter;
+	
+	public List<GameCharacter> getGameCharacters(){
+		return gameCharacter;
+	}
+	
 }

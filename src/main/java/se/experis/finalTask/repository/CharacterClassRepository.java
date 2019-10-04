@@ -6,4 +6,7 @@ import se.experis.finalTask.model.CharacterClass;
 public interface CharacterClassRepository extends JpaRepository<CharacterClass, String>{
 	
 	CharacterClass findClassByRace(String race);
+	
+	CharacterClass findClassById(int id);
+	
 }

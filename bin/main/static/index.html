@@ -20,46 +20,118 @@
 	    <input type="button" value="Submit" onclick="searchById()">
 	</form>
 	
+	
 	<h5>Add User</h5>
 	<form>
 		Username: <input type="text" id="userName"><br>
 		Password: <input type="text" id="pw"><br>
-    	<input type="submit" value="Submit" onclick="addUser()">
+    	<input type="button" value="Submit" onclick="addUser()">
 	</form>
 	
 	
+	<h5>Get Character From ID</h5>
+	<form>
+	    ID: <input type="text" id="character_form_id"> <br>   
+	    <input type="button" value="Submit" onclick="getCharacterFromId()">
+	</form>
 	
 	<h5>Get Class Info</h5>
-	<form id="frm1">
+	<form>
 	    Class Name: <input type="text" id="className"><br>    
 	    <input type="button" value="Submit" onclick="getClass()">
 	</form>
-
+	
+	
+	<h5>Add Character</h5>
+	<form>
+		Level: <input type="text" id="level"><br>
+		Class ID: <input type="text" id="class_id"><br>
+		User ID: <input type="text" id="user_id"><br>
+    	<input type="button" value="Submit" onclick="addCharacter()">
+	</form>
+	
 <script type="text/javascript">
 	function searchById() {
   		var input_id = document.getElementById("form_id").value;
   		window.location.replace("/api/user/"+input_id);
-	}
+  	}
+</script>
+<script type="text/javascript">
 	function getClass() {
   		var className = document.getElementById("className").value;
   		window.location.replace("/api/class/"+className);
 	}
+</script>
+<script type="text/javascript">
+	function getCharacterFromId(){
+		var input_id = document.getElementById("character_form_id").value;
+		window.location.replace("api/character/"+input_id);
+	}
+</script>
+
+<script type="text/javascript">
 	function addUser() {
 		console.log("CLICKED");
 		var uName = document.getElementById("userName").value;
 		var pword = document.getElementById("pw").value;
 		
-		var jsonString = {user_name:uName, pw:pword};
+		var jsonString = {userName:uName, pw:pword};
 		console.log(JSON.stringify(jsonString));
 		
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', "/api/user", true);
-		xhr.send(JSON.stringify(jsonString));
-		window.location.replace("/");
+		xhr.open('POST', "/api/user");
+		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		
+		
+		
+		xhr.onreadystatechange = function() {
+            // Call a function when the state changes.
+        	if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+    	       // Request finished. Do processing here.
+  	            console.log("COMPLETED!");
+
+                    //redirect on client
+        	}
+      	}
+
+
+            // Send the request as a string
+        xhr.send(JSON.stringify(jsonString));
+		
+		
 	}
 </script>
 
+<script type="text/javascript">
+	function addCharacter() {
+		var level = document.getElementById("level").value;
+		var class_id = document.getElementById("class_id").value;
+		var user_id = document.getElementById("user_id").value;
+		
+		var jsonString = {level:level, classId:class_id, userId:user_id};
+		console.log(JSON.stringify(jsonString));
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', "/api/character");
+		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		
+		
+		
+		xhr.onreadystatechange = function() {
+            // Call a function when the state changes.
+        	if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+    	       // Request finished. Do processing here.
+  	            console.log("COMPLETED!");
 
+                    //redirect on client
+        	}
+      	}
+
+
+            // Send the request as a string
+        xhr.send(JSON.stringify(jsonString));
+	}
+</script>
 
 </body>
 </html>
